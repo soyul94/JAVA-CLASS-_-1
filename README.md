@@ -1,1 +1,1 @@
-# JAVA-CLASS_1
+# JAVA_CLASS_1
