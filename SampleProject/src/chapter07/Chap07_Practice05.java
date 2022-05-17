@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Chap07_Practice05 {
@@ -69,9 +70,17 @@ public class Chap07_Practice05 {
 			hmIndex[i]= temp.getName();
 		}
 		System.out.println();
-		for(int i=0; i<hm.size(); i++) {
+		Set<String> keys = hm.keySet();
+		Iterator<String> it =  keys.iterator();
+//		for(int i=0; i<hm.size(); i++) {
+//			System.out.println("--------------------------------------------");
+//			hm.get(hmIndex[i]).stuPrint();
+//		}
+		while(it.hasNext()) {
+			String key=it.next();
+			Student value = hm.get(key);
 			System.out.println("--------------------------------------------");
-			hm.get(hmIndex[i]).stuPrint();
+			value.stuPrint();
 		}
 		System.out.println("--------------------------------------------");
 		
