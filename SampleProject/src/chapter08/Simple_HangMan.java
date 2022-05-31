@@ -97,7 +97,7 @@ class HangMan_Game{
 		while(true) {
 			int number = this.random.nextInt(this.wordVector.size());
 			
-			word=this.wordVector.get(number);
+			word=this.wordVector.get(number).toLowerCase();
 			if(word.length()<blankNum) // 랜덤으로 뽑힌 단어는 빈칸의 갯수보다 길이가 커야한다.
 				continue;
 			else
@@ -178,7 +178,7 @@ class HangMan_Game{
 				Iterator<Integer> keys = blankChar.keySet().iterator();
 				while(keys.hasNext()) {
 					Integer key = keys.next(); // 빈칸의 문자가 중복일 경우 따로따로 입력될 수 있도록 gameWord가 '_'인지 확인
-					if(blankChar.get(key).equals(answer)&&gameWord.get(key).equals('_')) {
+					if(blankChar.get(key).equals(answer) && gameWord.get(key).equals('_')) {
 						gameWord.set(key, answer);
 						break;
 					}	
