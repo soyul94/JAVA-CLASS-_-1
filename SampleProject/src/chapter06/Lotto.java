@@ -37,7 +37,7 @@ public class Lotto {
 		
 // random 클래스 이용해서 만들어보기 
 		for(int i=0; i<7; i++) {
-			lotto[i] = rd.nextInt(1, 45); // 왜 되는거딩..?
+			lotto[i] = rd.nextInt(45); // 왜 되는거딩..?
 			for (int n = 0; n < i; n++) {
 				if (lotto[i] == lotto[n]) 
 				i--;	

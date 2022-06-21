@@ -90,7 +90,7 @@ public class Chap10_OpenChallenge extends JFrame {
 						for(int i=0; i<number.length; i++) {
 							random[i] = (int)(Math.random()*5);
 							number[i].setText(Integer.toString(random[i]));
-							Thread.sleep(1000);
+							Thread.sleep(500);
 						}
 						if((random[0]==random[1]) && (random[1]==random[2])) {
 							say.setText("축하합니다 !!");
