@@ -5,9 +5,12 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,6 +26,8 @@ public class Chap11_Practice03 extends JFrame{
 	private String[] text= {"50000원", "10000원", "5000원", "1000원", "500원", "100원", "50원", "10원", "1원"};
 	private int[] money_unit= {50000, 10000, 5000, 1000, 500, 100, 50, 10, 1};
 	private JTextField totalMoney = new JTextField(12);
+	private JCheckBox[] check_unit = new JCheckBox[8];
+	private boolean[] check_bool = {false,false,false,false,false,false,false,false,true};
 	//private int sum=0;
 	
 	
@@ -51,20 +56,35 @@ public class Chap11_Practice03 extends JFrame{
 			temp.setBackground(Color.PINK);
 			
 			JLabel l = new JLabel(text[i],SwingConstants.RIGHT);
-			l.setBounds(0, 0, 100, 30);
+			l.setBounds(0, 0, 80, 30);
 			//l.setBackground(Color.PINK);
 			temp.add(l);
 			
-			JPanel p= new JPanel();
-			p.setBounds(100, 0, 200, 30);
+			JPanel text= new JPanel();
+			text.setBounds(100, 0, 100, 30);
 			money[i]=new JTextField("0",7);
 			money[i].setHorizontalAlignment(JTextField.CENTER);
-			p.add(money[i]);
-			p.setOpaque(true);
-			p.setBackground(Color.PINK);
-			temp.add(p);
+			text.add(money[i]);
+			text.setOpaque(true);
+			text.setBackground(Color.PINK);
+			temp.add(text);
+			
+			JPanel check = new JPanel();
+			check.setBounds(180, 0, 100, 30);
+			if(i!=(money.length-1)) {
+				check_unit[i] = new JCheckBox();
+				check_unit[i].setBackground(Color.PINK);
+				check_unit[i].addItemListener(new MyItemListener());
+				check.add(check_unit[i]);
+			}
+			check.setOpaque(true);
+			check.setBackground(Color.PINK);
+			temp.add(check);
+			
 			c.add(temp);
 		}
+		
+		
 		setSize(300,400);
 		setVisible(true);
 		setBackground(Color.PINK);
@@ -79,8 +99,11 @@ public class Chap11_Practice03 extends JFrame{
 			int num= Integer.parseInt(totalMoney.getText());
 			
 			for(int i=0; i<money.length; i++) {
-				money[i].setText(Integer.toString(num/money_unit[i]));	
-				num %=money_unit[i];
+				money[i].setText("0");	
+				if(check_bool[i]) {
+					money[i].setText(Integer.toString(num/money_unit[i]));	
+					num %=money_unit[i];	
+				}
 			}
 			
 //			for(int i=0; i<money.length; i++) {
@@ -89,6 +112,27 @@ public class Chap11_Practice03 extends JFrame{
 //			totalMoney.setText(Integer.toString(sum));
 		}
 	}
+	
+	
+	class MyItemListener implements ItemListener {
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			JCheckBox check = (JCheckBox)e.getSource();
+			
+			for(int i=0; i<check_unit.length; i++) {
+				if(check_unit[i]==check) { //객체의 레퍼런스를 비교하는 것이기 때문에 단순 ==로 비교함.
+					if(e.getStateChange()==ItemEvent.SELECTED) {
+						check_bool[i]=true;	
+					}
+					else {
+						check_bool[i]=false;
+					}
+				}	
+			}
+			
+		}
+	}
+	
 }
 
 
